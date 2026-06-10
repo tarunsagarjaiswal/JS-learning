@@ -1,3 +1,5 @@
+//Object also has its prtotype
+
 //objects can be declared in two ways ==>  1> by literal, 2> by constructor 
 
 //In JavaScript, a singleton is a design pattern that ensures only one instance of a class or object exists throughout the application, providing a single global point of access. It’s commonly used for shared resources like configuration managers, logging services, or database connections.
@@ -10,6 +12,9 @@
 
 //symbol declartion
 const mySym = Symbol("key1")
+const user = {}
+console.log(user);  //output => {}
+
 
 const JsUser = {
     //its property like name, age, email, etc are in string and it by default like name === "name",etc.
@@ -26,11 +31,11 @@ const JsUser = {
 //to access literal object property
 // console.log(JsUser.name);       //   Tarun
 
-// console.log(JsUser["name"]);    //this method is more used bcauz when the prop is defined in string also then we can access it but with JsUser.full name it will give error
+console.log(JsUser["name"]);    //this method is more used bcauz when the prop is defined in string also then we can access it but with JsUser.full name it will give error
 
-// console.log(JsUser["full name"]);       //  Tarun Sagar Jaiswal
+console.log(JsUser["full name"]);       //  Tarun Sagar Jaiswal
 
-// console.log(JsUser[mySym]);         //out =>  myKey1   and for accessing it can only be done by JsUser[mySym]
+console.log(JsUser[mySym]);         //out =>  myKey1   and for accessing it can only be done by JsUser[mySym]
 
 
 // The Object.freeze() method in JavaScript is used to make an object immutable — meaning you cannot add, remove, or change its properties once it’s frozen.
@@ -38,7 +43,7 @@ JsUser.Email = "tarun@chatgpt.com"
 // Object.freeze(JsUser)
 // JsUser.Email = "tarun@microsoft.com"        //cant be changed as object JsUser is freezed
 
-// console.log(JsUser);
+console.log(JsUser);
 /*output =>       {
                     name: 'Tarun',
                     'full name': 'Tarun Sagar Jaiswal',
