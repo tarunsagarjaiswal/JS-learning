@@ -71,6 +71,114 @@ console.log(tinderUser.hasOwnProperty("isLogged"));     //  false
 
 
 
+/*OBJECT  DESTRUCTING*/
+
+// Basic Object Destructuring
+const user = {
+     name: "Tarun",
+      age: 22 
+            }
+
+const { name, age } = user;
+console.log(name); // Tarun
+console.log(age);  // 22
+
+
+// Aliases (Renaming Variables)
+const person = { name: "Tarun", city: "Ujjain" };
+
+const { name: userName, city: hometown } = person;
+console.log(userName); // Tarun
+console.log(hometown); // Ujjain
+
+
+// Default Values
+const student = { id: 1, grade: "A" };
+
+const { grade, country = "India" } = student;
+console.log(grade);   // A
+console.log(country); // India (default used because property missing)  or we can say it is dynamically allocates.
+
+
+// Nested Object Destructuring
+const employee = {
+  id: 101,
+  details: { dept: "EE", city: "Indore" }
+};
+
+const { details: { dept, city } } = employee;
+console.log(dept); // EE
+console.log(city); // Indore
+
+/****************** API's and JSON *******************/
+
+/*What is an API?
+API = Application Programming Interface
+
+It’s like a messenger between two software systems.
+
+It defines rules for how one program can talk to another.
+
+Example:
+
+When you log in with Google on a website, that site uses Google’s Login API.
+
+The API lets the site request your profile info securely without knowing Google’s internal code.
+
+👉 Think of it as a restaurant menu:
+
+You order food (make a request).
+
+The kitchen (server) prepares it.
+
+The waiter (API) delivers it back to you.*/
 
 
 
+/*What is JSON?
+JSON = JavaScript Object Notation
+
+It’s a data format used to exchange information between systems.
+
+Human-readable and lightweight.
+
+Looks like JavaScript objects but is just text.
+
+Example JSON
+{
+  "name": "Tarun",
+  "age": 22,
+  "skills": ["JavaScript", "C++", "Git"]
+}
+Keys are always in quotes.
+
+Values can be strings, numbers, booleans, arrays, or nested objects.*/
+
+
+
+/* API + JSON Together
+Most modern APIs send and receive data in JSON format.
+
+Example:
+You call a weather API:
+
+Code
+GET https://api.weather.com/current?city=Ujjain
+
+Response (JSON):
+
+{
+  "city": "Ujjain",
+  "temperature": 32,
+  "condition": "Sunny"
+}
+
+Your app can now use this JSON to display weather info.*/
+
+
+
+
+/* Key Takeaway
+API = the bridge that lets apps talk.
+
+JSON = the language they often use to exchange data. */
