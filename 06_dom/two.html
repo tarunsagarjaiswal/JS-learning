@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM | Chai aur Code</title>
+</head>
+<body style="background-color: #212121;">
+        <div class="parent" style= "color: #fff;">
+            <div class="day">Monday</div>
+            <div class="day">Tuesday</div>
+            <div class="day">Wednesday</div>
+            <div class="day">Thursday</div>
+        </div>
+</body>
+<script>
+    const parent = document.querySelector(".parent");  
+    // Selects the <div class="parent"> element
+
+    console.log(parent);
+    // OUTPUT: <div class="parent" style="color:#fff;">...</div>
+
+    console.log(parent.children);
+    // OUTPUT: HTMLCollection(4) [div.day, div.day, div.day, div.day]
+
+    console.log(parent.children[1].innerHTML);
+    // OUTPUT: "Tuesday" (because index 1 = second child)
+
+    // Loop through all children
+    for (let i = 0; i < parent.children.length; i++) {
+        console.log(parent.children[i].innerHTML);
+        // OUTPUT: "Monday", "Tuesday", "Wednesday", "Thursday"
+    }
+
+    // Change style of second child
+    parent.children[1].style.color = 'orange';
+    // Tuesday text becomes orange
+
+    console.log(parent.firstElementChild);
+    // OUTPUT: <div class="day">Monday</div>
+
+    console.log(parent.lastElementChild);
+    // OUTPUT: <div class="day">Thursday</div>
+
+    const child = document.querySelector('.day');
+    console.log(child);
+    // OUTPUT: <div class="day">Monday</div> (first match)
+
+    console.log(child.parentElement);
+    // OUTPUT: <div class="parent" style="color:#fff;">...</div>
+
+    console.log(child.nextElementSibling);
+    // OUTPUT: <div class="day">Tuesday</div>
+
+    console.log("NODES :-", parent.childNodes);
+    // OUTPUT: NodeList(9) [text, div.day, text, div.day, text, div.day, text, div.day, text]
+    // Includes text nodes (line breaks/spaces) + element nodes
+</script>
+</html>

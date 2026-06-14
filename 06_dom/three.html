@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai Aur Code</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    
+</body>
+<script>
+    // Create a new <div> element
+    const div = document.createElement("div")
+    console.log(div);
+    // OUTPUT: <div></div> (empty div created in memory)
+
+    // Add class
+    div.className = 'Main';
+    // OUTPUT: <div class="Main"></div>
+
+    // Add random id between 1–10
+    div.id = Math.floor(Math.random() * 10 + 1)
+    // Example OUTPUT: <div class="Main" id="7"></div>
+
+    // Add custom attribute
+    div.setAttribute("title", "generated title")
+    // OUTPUT: <div class="Main" id="7" title="generated title"></div>
+
+    // Add inline styles
+    div.style.backgroundColor = 'green'
+    div.style.padding = "12px";
+    // OUTPUT: <div class="Main" id="7" title="generated title" style="background-color:green; padding:12px;"></div>
+
+    // Add text inside div
+    // div.innerText = "Chai Aur Codethread"   // (direct way)
+    const addTxt = document.createTextNode("chai aur codethread")
+    div.appendChild(addTxt)
+    // OUTPUT: <div class="Main" id="7" title="generated title" style="background-color:green; padding:12px;">chai aur codethread</div>
+
+    // Finally attach div to body
+    document.body.appendChild(div)
+    // Now the new div is visible on the webpage
+</script>
+</html>
