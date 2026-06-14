@@ -1,12 +1,1 @@
-{
-  "name": "My Codespace Config",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
-      ]
-    }
-  }
-}
+{"image":"mcr.microsoft.com/devcontainers/universal:2"}
