@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai aur Codethread</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <ul class="language">
+        <li>JavaScript</li>
+    </ul>
+</body>
+<script>
+    // ✅ ADDING ELEMENTS
+
+    function addLang(lang) {
+        const li = document.createElement("li")
+        li.innerHTML = `${lang}`   // less optimized (re-parses HTML)
+        document.querySelector(".language").appendChild(li)
+    }
+
+    addLang("python")   // OUTPUT: <li>python</li>
+    addLang("golang")   // OUTPUT: <li>golang</li>
+
+    function optimizedAdd(lang) {
+        const li = document.createElement("li")
+        li.appendChild(document.createTextNode(lang)) // safer, faster
+        document.querySelector(".language").appendChild(li)
+    }
+
+    optimizedAdd("Mojo")   // OUTPUT: <li>Mojo</li>
+
+    // ✅ EDITING ELEMENTS
+
+    const secondLang = document.querySelector('li:nth-child(2)')
+    console.log(secondLang);
+    // OUTPUT: <li>python</li>
+
+    // Replace with new <li>
+    // secondLang.innerHTML = "TypeScript"   // direct way
+    const newLi = document.createElement("li")
+    newLi.textContent = "TypeScript"
+    secondLang.replaceWith(newLi)
+    // OUTPUT: <li>TypeScript</li> replaces <li>python</li>
+
+    const firstLang = document.querySelector('li:first-child')
+    firstLang.outerHTML = '<li>CPP</li>'
+    // OUTPUT: <li>CPP</li> replaces <li>JavaScript</li>
+
+    // ✅ REMOVING ELEMENTS
+
+    const lastLang = document.querySelector('li:last-child')
+    lastLang.remove()
+    // OUTPUT: last <li> removed (Mojo disappears)
+</script>
+</html>
