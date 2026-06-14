@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM learning</title>
+
+    <style>
+        .bg-black{
+            background-color: black;
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body class="bg-black">
+        <div>
+            <h1 id="title" class="heading ">DOM learnig on chai aur code <span style="display: none;">text code</span></h1>
+            <h2>Lorem ipsum dolor sit.</h2>
+            <h2>Lorem ipsum dolor sit.</h2>
+            <h2>Lorem ipsum dolor sit.</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <input type="password" name="" id="">
+            <ul>
+                <li class="list-item">one</li>    
+                <li class="list-item">two</li>
+                <li class="list-item">three</li>
+                <li class="list-item">four</li>
+            </ul>
+        </div>
+</body>
+</html>
+
+<!-- 1. document.getElementById('title')
+Finds the element with id="title".
+
+Returns the whole <h1> element: -->
+
+<!-- 2. document.getElementById('title').id
+// → "title" -->
+
+<!-- 3. document.getElementById('title').class
+// → undefined 
+❌ There is no .class property in JavaScript DOM.
+
+That’s why you get undefined.-->
+
+<!-- 4. document.getElementById('title').classNam
+// → undefined
+ -->
+
+<!-- 5. document.getElementById('title').className
+// → "heading"
+ -->
+
+<!-- 6. document.getElementById('title').getAttribute("class")
+// → "heading"
+This is a method to fetch any attribute value (id, class, style, etc.).
+
+More flexible than .id or .className.
+  -->
+
+<!-- 7. element.setAttribute("attributeName", "value");
+
+attributeName → the attribute you want to set (like id, class, style, src, etc.)
+
+value → the new value you want to give it
+
+eg:-
+<h1 id="title" class="heading">DOM learning</h1>
+let heading = document.getElementById("title");
+
+// Change class
+heading.setAttribute("class", "new-heading");
+
+// Add a custom attribute
+heading.setAttribute("data-topic", "DOM");
+
+<h1 id="title" class="new-heading" data-topic="DOM">DOM learning</h1>
+-->
+
+
+<!-- 8. some more like css things
+
+const title = document.getElementById('title')
+undefined
+
+title.style.color = 'red'
+'red'
+
+title.style.color = 'white'
+'white'
+
+title.style.backgroundColor = 'aquablue'
+'aquablue'
+
+title.style.backgroundColor = 'aqua'
+'aqua'
+
+title.style.backgroundColor = 'green'
+'green'
+
+title.style.borderRadius = '20px'
+'20px'
+
+title.style.padding = '10px'
+'10px'
+ -->
+
+<!-- 9. title.textContent
+// → "DOM learnig on chai aur code"
+Returns all text inside the element, exactly as it appears in HTML.
+
+Includes hidden text too (like from <span style="display:none">). 
+    
+    title.innerHTML
+// → "DOM learnig on chai aur code"
+    Returns the HTML inside the element.
+
+If you had child tags, it would show them.
+
+title.innerText
+// → "DOM learnig on chai aur code"
+Returns the visible text (what the user sees on the page).
+
+Ignores hidden text (like display:none or visibility:hidden).-->
+
+<!-- 10. // -------------------- QUERY SELECTOR --------------------
+
+// Select element by ID (same as getElementById)
+const title = document.querySelector("#title");  
+// Finds <h1 id="title">...</h1>
+
+// Select element by class
+const heading = document.querySelector(".heading");  
+// Finds first element with class="heading"
+
+// Select element by tag
+const para = document.querySelector("p");  
+// Finds first <p> element
+
+// Select nested element (CSS style)
+const nested = document.querySelector("div > p");  
+// Finds first <p> directly inside a <div>
+
+// Select by attribute
+const inputBox = document.querySelector("input[type='text']");  
+// Finds first <input> with type="text"
+
+// -------------------- NOTES --------------------
+// querySelector() → returns FIRST match only
+// querySelectorAll() → returns ALL matches (NodeList)
+// You can use ANY CSS selector (id, class, tag, attribute, nested)
+// If no match found → returns null
+ -->
+
+ <!-- 11. const turnGreen = myul.querySelector("li")
+undefined
+
+turnGreen.innerText = "hell Nah" -->
+
+
+<!-- 12. // -------------------- QUERY SELECTOR ALL --------------------
+
+// Select ALL <li> elements
+const tempLiList = document.querySelectorAll("li");
+
+// querySelectorAll returns a NodeList (looks like array but not exactly an array)
+// You cannot directly do tempLiList.style because NodeList has no style property
+
+// Correct way → access individual element by index
+tempLiList[0].style.backgroundColor = "green";  // first <li>
+tempLiList[1].style.backgroundColor = "blue";   // second <li>
+
+// Or loop through all elements
+tempLiList.forEach(li => {
+  li.style.backgroundColor = "red";
+});
+
+// -------------------- CHECKING TYPE --------------------
+console.log(Array.isArray(tempLiList));  
+// false → NodeList is NOT a real array
+
+// But NodeList is array-like → you can use forEach, length, index
+console.log(tempLiList.length);  // number of <li> elements
+console.log(tempLiList[0]);      // first <li> element
+
+// -------------------- QUERY SELECTOR ALL FOR H1 --------------------
+const myH1 = document.querySelectorAll("h1");
+myH1[0].style.color = "green";   // first <h1>
+
+// -------------------- NOTES --------------------
+// querySelectorAll → returns NodeList (array-like, not true array)
+// Access elements with [index] or loop with forEach
+// Cannot directly apply style to NodeList, only to individual elements
+ -->
+
+
+ <!-- 13. // -------------------- GET ELEMENTS BY CLASS NAME --------------------
+
+// Select all elements with class="list-item"
+const tempClassList = document.getElementsByClassName("list-item");
+
+// This returns an HTMLCollection (NOT an array)
+// HTMLCollection is array-like: has length, index access, but no forEach
+
+console.log(tempClassList.length);   // 4
+console.log(tempClassList[0]);       // first <li class="list-item">
+
+// -------------------- CONVERT TO ARRAY --------------------
+
+// Convert HTMLCollection to real array
+const myconvertedHTMLCollectionLists = Array.from(tempClassList);
+
+// Now you can use array methods like forEach, map, filter, etc.
+myconvertedHTMLCollectionLists.forEach((it) => {
+  console.log(it);   // logs each <li> element
+});
+
+// -------------------- NOTES --------------------
+// getElementsByClassName → returns HTMLCollection (live collection)
+// HTMLCollection updates automatically if DOM changes
+// HTMLCollection does NOT support forEach directly
+// Use Array.from() or spread operator [...] to convert to real array
+// After conversion → you can use array methods like forEach, map, etc.
+ -->
+
+
