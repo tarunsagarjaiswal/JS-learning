@@ -13,6 +13,10 @@
 
 
 //new just initializes an object using its constructor.
+<<<<<<< HEAD
+=======
+
+>>>>>>> a84ce234230b27846e1a4a0046a2d0553191e8a9
 let myDate = new Date();      //This is called object initialization using a constructor function.  
 let arr = new Array();         // Array object
 
