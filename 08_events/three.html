@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeThread</title>
+</head>
+<body>
+        <h1>hell and JS</h1>
+        <button id="start">start</button>
+        <button id="stop">Stop</button>
+</body>
+
+<script>
+    // ==========================================
+// REVISION NOTES: HOW INTERVALS WORK IN JS
+// ==========================================
+
+// --- 1. Basic setInterval Syntax (Commented out example) ---
+// Unlike setTimeout (which runs once), setInterval repeats a function 
+// indefinitely at every specified time interval.
+// setInterval(function() {
+//     console.log(`Tarun and Saavi`);
+// }, 1000); // Repeats every 1 second (1000ms)
+
+
+// --- 2. Passing Arguments to the Function ---
+// You can pass extra arguments to your function through setInterval.
+// Any arguments you add AFTER the timer milliseconds will be given to the function.
+
+// const hell = function (str) {
+//     console.log(`Saavi and ${str}`);
+// }
+
+// Here, 'Tarun' is passed as the third parameter. It becomes the 'str' variable inside hell().
+// const IntervalId = setInterval(hell, 1000, 'Tarun')
+
+// Just like clearTimeout, clearInterval(id) completely stops the repetition.
+// clearInterval(IntervalId);
+
+
+// ==========================================
+// THE SMALL TASK: START & STOP BUTTONS
+// ==========================================
+
+// This is our callback function that takes a parameter 'str'
+const hell = function (str) {
+    console.log(`Saavi and ${str}`);
+}
+
+// ⚠️ IMPORTANT SCOPE CONCEPT: 
+// We declare 'let start;' out here in the global/parent scope.
+// If we declared it inside the click event, the #stop button wouldn't be able to see it!
+let start;
+
+// The "Multiple Clicks" Bug: If you click the #start button 5 times in a row without clicking stop, your browser will trigger 5 completely separate loops running at the same time, and your console will go crazy. Since your code overwrites the start variable with each click, clicking #stop will only stop the very last loop you created.
+
+// If you ever want to fix that bug in the future, a common trick is to clear any running interval right before creating a new one inside your start button, like this:
+
+document.querySelector("#start").addEventListener("click", function() {
+    // We save the interval's ID into our 'start' variable so we can track it.
+    // This starts repeating our function every 1.5 seconds (1500ms).
+
+    clearInterval(start); // Stop any existing loop before making a new one!
+    start = setInterval(hell, 1500, 'Tarun');
+}, false);
+
+// --- The Stop Button ---
+document.querySelector("#stop").addEventListener("click", function() {
+    // This clears the interval using the ID stored in 'start', freezing the loop.
+    clearInterval(start);
+    console.log("Interval Stopped!");
+}, false);
+
+
+
+</script>

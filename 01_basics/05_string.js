@@ -20,13 +20,13 @@ const gameName = new String('tarunsus');   //new String('tarunsus') creates a St
 // .toLowerCase() → "tarunsus"
 
 // .charAt(index) → returns character at position
-console.log(gameName.__proto__);        //to see it s object.
+console.log(gameName.__proto__);        //to see its object.
 //now we are using proto fxn or method =s of string
 
 // console.log(gameName.length);
 // console.log(gameName.charAt(3));
 // console.log(gameName.indexOf('u',4));       //character , after what index u wabt to find
-// console.log(gameName.toUpperCase())         //actual string dosent changed bcauz it is primitive and we take copy
+// console.log(gameName.toUpperCase());         //actual string dosent changed bcauz it is primitive and we take copy
 
 const newString = gameName.substring(2, 5);     //start idx, prints upto end idx - 1
 console.log(newString);

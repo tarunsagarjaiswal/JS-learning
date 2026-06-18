@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeThread</title>
+</head>
+<body>
+        <h1>hell Nahhh!!</h1>
+        <button id="stop">Stop</button>
+</body>
+<script>
+    /*Think of innerHTML as saying: “Replace whatever’s inside with this new stuff.”  
+Whereas appendChild() says: “Take this new node and stick it at the end of the existing children.”*/
+
+        // ==========================================
+// REVISION NOTES: HOW TIMERS WORK IN JS
+// ==========================================
+
+// --- 1. Basic setTimeout Syntax (Commented out example) ---
+// setTimeout allows us to run a piece of code ONCE after a specific delay.
+// It takes two main arguments: a function to run, and the time to wait in milliseconds.
+// 1 second = 1000 milliseconds.
+
+// setTimeout(function() {
+//     console.log('nishant');
+// }, 2000); // This would wait exactly 2 seconds (2000ms) and then print 'nishant'
+
+
+// --- 2. Passing a Pre-defined Function ---
+// Instead of writing the function directly inside setTimeout, we can create it 
+// beforehand and just pass its variable name.
+
+const name = function () {
+    console.log('Tarun');
+}
+
+// NOTE: We pass 'name', NOT 'name()'. 
+// If we add parentheses 'name()', it will execute IMMEDIATELY instead of waiting.
+setTimeout(name, 1000); // Waits 1 second, then prints 'Tarun'
+
+
+// --- 3. Manipulating the DOM inside a Timer ---
+// This function finds the first <h1> element on your webpage and changes its text.
+const textChange = function () {
+    const h1 = document.querySelector("h1");
+    h1.innerHTML = "Papa Player";
+}
+
+// Every setTimeout call returns a unique tracking ID (a number).
+// We store this ID in a variable called 'changeMe' so JavaScript knows *which* timer we are talking about later.
+const changeMe = setTimeout(textChange, 2000); // Scheduled to change the text in 2 seconds
+
+
+// --- 4. Stopping/Canceling a Timer ---
+// 'clearTimeout(id)' stops a scheduled timer before it gets a chance to run.
+
+// If you uncomment the line below, the "Papa Player" change will NEVER happen:
+// clearTimeout(changeMe);
+
+
+// --- 5. Stopping the Timer with a Button Click ---
+// Here, we grab a button with the ID 'stop' from your HTML.
+// We attach a click listener to it. If the user clicks that button BEFORE the 2 seconds are up,
+// 'clearTimeout(changeMe)' gets triggered and successfully cancels the text change!
+document.querySelector("#stop").addEventListener("click", function() {
+    clearTimeout(changeMe);
+    console.log("Timer stopped! The text won't change.");
+}, false); 
+// Note: 'false' at the end specifies the event bubbling phase (default behavior).
+
+
+</script>
+</html>

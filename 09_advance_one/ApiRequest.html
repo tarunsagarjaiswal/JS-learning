@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- /*📝 My First API Notes: Fetching GitHub Data
+1. What is an API?
+API stands for Application Programming Interface.
+
+Simple analogy: Think of an API like a waiter at a restaurant. You (the client) give the waiter your order (a request), the waiter goes to the kitchen (the server/database), and brings you back your food (the data).
+
+2. The API Endpoint
+The URL: https://api.github.com/users/hiteshchoudhary
+
+This specific link is called an API Endpoint. It is the exact web address where GitHub stores the public data for that specific user.
+
+3. The Raw Data (JSON)
+When you opened that link in your browser, the messy block of text you saw is called JSON (JavaScript Object Notation).
+
+JSON is the standard format used to send and receive data across the internet. It is designed to be fast and easy for computers to read, but it usually looks like a giant, chaotic wall of text to humans.
+
+4. Beautifying the Code (JSON Formatter)
+What it does: Because raw JSON is hard for our eyes to read, developers use a JSON Formatter.
+
+The result: When you pasted the raw text and clicked "beautify," the formatter restructured the data. It added line breaks and indentations to organize the information into perfectly readable Key-Value pairs.
+
+Example of Key-Value pairs you likely saw:
+"login": "hiteshchoudhary"
+"name": "Hitesh Choudhary"
+
+📋 Summary of the Workflow:
+Make a Request: Go to the API Endpoint URL in the browser.
+
+Receive Data: The server responds by sending back raw JSON data.
+
+Format Data: Copy the raw JSON into a formatter to "beautify" it so it becomes human-readable.*/
+
+
+
+/*An API Endpoint is simply a specific web address (URL) that allows a digital system to talk to another digital system. It is the exact "location" or "destination" where an API goes to find the specific resource it needs.
+
+The Base URL: https://api.github.com
+
+This is the main address of the server. It's like the front door of GitHub's entire data warehouse.
+
+The Endpoint: /users/hiteshchoudhary
+
+This is the specific room or folder you are asking to look inside. This exact path tells GitHub: "Hey, don't give me everything you have. Just give me the data for this one specific user."*/
+
+
+
+/* JavaScript talks to APIs behind the scenes before cleaner tools like fetch() were invented.
+
+📝 My Notes: What is XMLHTTP (XMLHttpRequest)?
+1. The Core Concept
+
+XMLHTTP (or XMLHttpRequest) is a built-in browser tool (an object) in JavaScript. It allows a webpage to request data from a server and update the page without reloading the entire website.
+
+Simple Analogy: Imagine you are filling out a form online. In the old days, every time you clicked "Submit," the whole screen went blank and reloaded. XMLHTTP is like a background runner. It takes your request, runs to the server, grabs the data, and sneaks it back onto the page while you keep reading.
+
+2. Why is it called "XML" if we use "JSON"?
+When this tool was invented years ago, XML was the most popular format for sending data.
+
+Today, almost everyone uses JSON instead. Even though the name still says "XML", XMLHttpRequest works perfectly fine with JSON data (like the GitHub data you just looked at!).
+
+
+when you use XMLHTTP to talk to an API, the request goes through 5 different stages (tracked by numbers 0 to 4). Hitesh will likely emphasize these state changes:
+
+State Number,Name,What it Means
+0,      UNSENT,                     "The tool is created, but you haven't opened the connection yet."
+1,      OPENED,                     You have specified the URL endpoint you want to talk to.
+2,      HEADERS_RECEIVED,           "The request has reached the server, and the server sent back a quick handshake."
+3,      LOADING,                    The server is downloading the data to your browser.
+4,      DONE,                       "Success! The operation is complete, and your data is fully ready to use."*/ -->
+
+
+
+<!-- 📝 My Notes: The V8 Engine (Under the Hood of JavaScript)
+1. What is the V8 Engine?
+The Core Problem: Your computer’s CPU (processor) is actually quite dumb. It only understands machine code (1s and 0s). It has absolutely no idea what const, function, or XMLHttpRequest means.
+
+The Solution: The V8 engine acts as a master translator. It is an open-source program created by Google, written in C++. Its single job is to take your human-readable JavaScript code and convert it into lightning-fast machine code that the computer can execute. -->
+</body>
+
+<script>
+    // 1. Define the API Endpoint (the specific digital address where the data lives)
+const requestURL = 'https://api.github.com/users/hiteshchoudhary';
+
+// 2. Create the XMLHttpRequest object (our background runner to handle the network request)
+const xhr = new XMLHttpRequest();
+
+// 3. Prepare the request: set the method to 'GET' (fetching data) and pass the URL
+// (Note: This only configures the request; it doesn't send it over the internet yet)
+xhr.open('GET', requestURL);
+
+// 4. Set up an event listener that triggers every time the request progress changes
+xhr.onreadystatechange = function () {
+    // Prints the progress state numbers (1, 2, 3, 4) to the console in real-time
+    console.log(xhr.readyState);
+
+    // State 4 means 'DONE' - the data has completely finished downloading from GitHub
+    if(xhr.readyState == 4) {
+        
+        // CRUCIAL STEP: GitHub sends data as a raw string (this.responseText).
+        // JavaScript strings can't read properties, so JSON.parse() converts it into a clean JavaScript Object.
+        const data = JSON.parse(this.responseText);
+        
+        // Prints the entire formatted data object to your console
+        console.log(data);
+        
+        // Confirms the conversion worked. This will print 'object' (without JSON.parse, it would be 'string')
+        console.log(typeof(data));  
+        
+        // Uses dot notation to extract and print just the follower count from the object
+        console.log(data.followers);
+    }
+}
+
+// 5. The final trigger. This line actually fires the request across the internet to GitHub's servers.
+xhr.send();
+    
+</script>
+
+</html>
+

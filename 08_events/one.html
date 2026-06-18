@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html Events</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a target="_blank" style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+
+<!-- onclick="alert('clicked on owl')"  
+    this inline js is a very bad practice -->
+
+<script>
+/*    
+    /// Your code:
+document.getElementById("owl").onclick = function() {
+    alert('owl');
+};
+
+// 🔹 What's "bad" or limiting here:
+
+// 1. Using .onclick overwrites any existing click handler.
+//    If you assign another .onclick later, the previous one is lost.
+//    Example:
+document.getElementById("owl").onclick = () => alert("First");
+document.getElementById("owl").onclick = () => alert("Second");
+// 👉 Only "Second" runs, "First" is gone.
+
+// 2. Cannot attach multiple listeners easily.
+//    With addEventListener, you can stack multiple handlers:
+let owl = document.getElementById("owl");
+owl.addEventListener("click", () => alert("First"));
+owl.addEventListener("click", () => alert("Second"));
+// 👉 Both run when clicked.
+
+// 3. Harder to remove specific handlers.
+//    With .onclick, you can only clear it by setting to null:
+owl.onclick = null;
+//    With addEventListener, you can remove exactly the function you want:
+function sayOwl() { alert("owl"); }
+owl.addEventListener("click", sayOwl);
+owl.removeEventListener("click", sayOwl);
+
+// 4. Less flexible for advanced options.
+//    addEventListener supports options like { once: true } or { capture: true }:
+owl.addEventListener("click", () => alert("Runs only once"), { once: true }); */
+
+
+
+/*
+// 🔹 Old IE Method: attachEvent()
+// This was used in Internet Explorer before addEventListener existed.
+// It ONLY worked in IE8 and below, and is now obsolete.
+
+var owl = document.getElementById("owl");
+owl.attachEvent("onclick", function() {
+    alert("owl clicked (IE only)");
+});
+
+// Problems with attachEvent:
+// 1. Non-standard → only worked in old IE.
+// 2. No proper event object passed (you had to use window.event).
+// 3. No support for capturing phase (only bubbling).
+// 4. addEventListener replaced it in modern browsers.
+
+// 🔹 jQuery Event Handling
+// jQuery simplified cross-browser event handling before addEventListener was widely supported.
+
+$("#owl").on("click", function() {
+    alert("owl clicked with jQuery");
+});
+
+// Advantages of jQuery .on():
+// - Works across all browsers (handled compatibility issues).
+// - Can attach multiple events at once:
+$("#owl").on({
+    mouseenter: function() { console.log("mouse entered"); },
+    click: function() { console.log("clicked"); }
+});
+
+// - Supports event delegation easily:
+$("#list").on("click", "li", function() {
+    alert("You clicked: " + $(this).text());
+});
+
+// 🔹 Summary
+// - attachEvent() → obsolete, IE-only.
+// - jQuery .on() → popular before modern JS, still used in legacy projects.
+// - Modern best practice → use addEventListener().
+*/
+
+// //Today
+// events in js
+// In JavaScript, events are actions or occurrences (like clicks, key presses, or page loads) that your code can respond to using event handlers or listeners. The most modern and flexible way to handle them is with addEventListener().
+
+//defination of event :- Definition: Signals fired by the browser when something happens (user interaction or system action).
+
+///common event types
+// | **Category** | **Examples** |
+// | --- | --- |
+// | **Mouse Events** | ``click``, ``dblclick``, ``mousemove``, ``mouseover``, ``mouseout`` |
+// | **Keyboard Events** | ``keydown``, ``keypress``, ``keyup`` |
+// | **Form Events** | ``submit``, ``change``, ``focus``, ``blur`` |
+// | **Window Events** | ``load``, ``resize``, ``scroll``, ``unload`` |
+// | **Media Events** | ``play``, ``pause``, ``ended``, ``volumechange`` |
+// | **Error Events** | ``error`` (e.g., when a script fails to load) |  |
+
+    // document.getElementById("owl").addEventListener('dblclick', function() {
+    //     alert("owl double clicked");
+    // })
+
+/*
+    // 🔹 Event Listener in JavaScript
+
+// 👉 Definition:
+// An event listener is a function that waits for a specific event (like click, key press, or submit)
+// on an element and executes code when that event happens.
+
+// 👉 Syntax:
+element.addEventListener("event", callbackFunction, options);
+
+// Parameters:
+// 1. "event" → String name of the event (e.g., "click", "keydown", "submit")
+// 2. callbackFunction → Function to run when event occurs
+// 3. options (optional) → Controls behavior (capture, once, passive)
+
+// 👉 Example 1: Button Click
+const btn = document.getElementById("myBtn");
+btn.addEventListener("click", function() {
+  alert("Button clicked!");
+});
+
+// 👉 Example 2: Form Submit
+const form = document.querySelector("form");
+form.addEventListener("submit", function(e) {
+  e.preventDefault(); // stops reload
+  alert("Form submitted!");
+});
+
+// 👉 Example 3: Key Press
+document.addEventListener("keydown", function(e) {
+  console.log("Key pressed:", e.key);
+});
+
+// 👉 Example 4: Multiple Listeners
+btn.addEventListener("click", () => console.log("First listener"));
+btn.addEventListener("click", () => console.log("Second listener"));
+
+// 👉 Example 5: Options
+btn.addEventListener("click", () => console.log("Runs only once"), { once: true });
+
+// 👉 Removing Event Listener
+function handler() {
+  console.log("Listener removed after this");
+}
+btn.addEventListener("click", handler);
+btn.removeEventListener("click", handler);
+
+// 🔹 Why use addEventListener instead of .onclick?
+// 1. Multiple handlers possible
+// 2. Supports capturing vs. bubbling phases
+// 3. Can remove specific listeners
+// 4. Cleaner separation of HTML and JS
+
+// 🔹 Event Flow (Capturing vs. Bubbling)
+// - Capturing: Event travels from document → target
+// - Bubbling: Event travels from target → document
+// Default is bubbling, but you can set { capture: true } to use capturing.
+
+// 👉 Example: Capturing vs Bubbling
+document.body.addEventListener("click", () => console.log("Body Bubbling"));
+document.body.addEventListener("click", () => console.log("Body Capturing"), { capture: true });
+btn.addEventListener("click", () => console.log("Button Clicked"));*/
+
+     
+
+
+//The event object in JavaScript is automatically created and passed to your event handler whenever an event occurs. It contains all the details about that specific event, so you can inspect what happened and respond accordingly.
+
+/*What the Event Object Contains
+type → The kind of event ("click", "keydown", "submit", etc.).
+
+target → The element that triggered the event.
+
+currentTarget → The element the listener is attached to.
+
+key → For keyboard events, which key was pressed.
+
+clientX, clientY → Mouse coordinates relative to the viewport.
+
+preventDefault() → Stops the browser’s default action (e.g., stopping a form from reloading).
+
+stopPropagation() → Prevents the event from bubbling up to parent elements.*/
+
+
+
+/*The event object is always passed automatically to your handler.
+
+It gives you context about what happened (which element, which key, which coordinates).
+
+Use its methods (preventDefault, stopPropagation) to control event behavior.*/
+
+
+
+/*// 🔹 Event Object in JavaScript
+// The event object is automatically passed to your event handler.
+// It contains details about the event and methods to control it.
+
+// 👉 Example 1: Keydown Event
+document.addEventListener("keydown", function(e) {
+  console.log("Event type:", e.type);        // OUTPUT: "keydown"
+  console.log("Key pressed:", e.key);        // OUTPUT: "a" (if you press 'a')
+  console.log("Target element:", e.target);  // OUTPUT: [object HTMLDocument]
+});
+
+// 👉 Example 2: Form Submit
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault(); // stops page reload
+  console.log("Form submitted by:", e.target); 
+  // OUTPUT: [object HTMLFormElement]
+});
+
+// 👉 Example 3: Mouse Click
+document.getElementById("myBtn").addEventListener("click", function(e) {
+  console.log("Mouse X:", e.clientX);        // OUTPUT: e.g., 120
+  console.log("Mouse Y:", e.clientY);        // OUTPUT: e.g., 250
+  console.log("Event type:", e.type);        // OUTPUT: "click"
+});
+*/
+
+
+
+/*// 🔹 Optional Parameters in addEventListener
+// The third argument controls HOW the listener behaves.
+
+// Example 1: once → runs only once
+const btn1 = document.getElementById("btn1");
+btn1.addEventListener("click", () => {
+  console.log("This runs only once");
+}, { once: true });
+
+// OUTPUT:
+// First click → "This runs only once"
+// Second click → (nothing happens)
+
+
+// Example 2: capture → runs in capturing phase (top-down)
+document.body.addEventListener("click", () => {
+  console.log("Body capturing");
+}, { capture: true });
+
+const btn2 = document.getElementById("btn2");
+btn2.addEventListener("click", () => {
+  console.log("Button clicked");
+});
+
+// OUTPUT when button clicked:
+// Body capturing
+// Button clicked
+
+
+// Example 3: passive → improves performance for scroll/touch
+window.addEventListener("scroll", (e) => {
+  console.log("Scrolling detected");
+  // e.preventDefault(); ❌ not allowed in passive mode
+}, { passive: true });
+
+// OUTPUT when scrolling:
+// "Scrolling detected"
+*/
+
+// document.getElementById("owl").addEventListener("click", function(e) {
+//     alert("you clicked owl idiot")
+// },false)  //false is default means in bubbling and true for capturing
+
+/*// 🔹 Event Object Properties Demo
+
+const btn = document.getElementById("myBtn");
+
+btn.addEventListener("click", function(e) {
+  // Basic info
+  console.log("type:", e.type);              // OUTPUT: "click"
+  console.log("timestamp:", e.timeStamp);    // OUTPUT: e.g., 1234 (ms since page loaded)
+  console.log("defaultPrevented:", e.defaultPrevented); // OUTPUT: false (unless preventDefault called)
+
+  // Target info
+  console.log("target:", e.target);          // OUTPUT: <button id="myBtn">...</button>
+  console.log("currentTarget:", e.currentTarget); // OUTPUT: same as target here
+  console.log("srcElement:", e.srcElement);  // OUTPUT: same as target (legacy IE)
+  console.log("toElement:", e.toElement);    // OUTPUT: element mouse entered (for mouseover)
+
+  // Mouse coordinates
+  console.log("clientX:", e.clientX);        // OUTPUT: X position relative to viewport
+  console.log("clientY:", e.clientY);        // OUTPUT: Y position relative to viewport
+  console.log("screenX:", e.screenX);        // OUTPUT: X position relative to screen
+  console.log("screenY:", e.screenY);        // OUTPUT: Y position relative to screen
+
+  // Keyboard modifiers
+  console.log("altKey:", e.altKey);          // OUTPUT: true if Alt was pressed
+  console.log("ctrlKey:", e.ctrlKey);        // OUTPUT: true if Ctrl was pressed
+  console.log("shiftKey:", e.shiftKey);      // OUTPUT: true if Shift was pressed
+  console.log("keyCode:", e.keyCode);        // OUTPUT: numeric code (deprecated, use e.key)
+});
+*/
+
+//when false the first owl will print then ul aas it is in bubbling phasae and when true then it travels from top to bottom.
+// document.getElementById('images').addEventListener('click', function(e) {
+//     console.log('clicked inside in ul');
+    
+// }, false);
+
+// document.getElementById('owl').addEventListener('click', function(e) {
+//     console.log('clicked on owl');
+//     e.stopPropagation();        //dont go up or stop the bubble to propoagate more.
+    
+// }, false);
+
+
+// document.getElementById('google').addEventListener('click', function(e) {
+//     console.log('clicked on google');
+//     e.preventDefault();     //stops the working of anchor tag like doesnt work to redirect to the link
+
+// }, false);
+
+document.querySelector("#images").addEventListener('click', function(e) {
+    console.log(e.currentTarget);   //the which i added listner on it 
+    console.log(e.target.tagName);  //on which i pressing currently 
+
+    if(e.target.tagName == "IMG") {
+        let removeIt = e.target.parentNode;
+    removeIt.remove();
+    }
+    
+    //other method to remove 
+    // removeIt.parentNode.removeChild(removeIt);
+    
+    
+}, false);
+
+</script>
