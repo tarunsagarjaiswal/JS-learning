@@ -11,7 +11,13 @@
 // getSeconds()         now.getSeconds()	     e.g. 30
 // getTime()         	d.getTime()	             milliseconds since Jan 1, 1970
 
-let myDate = new Date();  
+
+//new just initializes an object using its constructor.
+
+let myDate = new Date();      //This is called object initialization using a constructor function.  
+let arr = new Array();         // Array object
+
+
 // console.log(myDate);    //output =>  2026-06-09T17:21:49.732Z
 // console.log(myDate.toString());  //output =>  Tue Jun 09 2026 17:24:53 GMT+0000 (Coordinated Universal Time)
 // console.log(myDate.toDateString());     //output =>  Tue Jun 09 2026
