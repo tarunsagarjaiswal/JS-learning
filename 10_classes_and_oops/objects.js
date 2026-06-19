@@ -43,10 +43,9 @@ createUser.prototype.printPrice = function() {
 const userOne = new createUser("Tarun_Milk", 20);
 const userTwo = new createUser("Saavi_Tea", 50);
 
-<<<<<<< HEAD
+
 userOne.printPrice();   //price is 20
-=======
+
 userOne.printPrice();
->>>>>>> 3274c661b4fd9cdbb6ae6900538ac2883127c340
 
 
