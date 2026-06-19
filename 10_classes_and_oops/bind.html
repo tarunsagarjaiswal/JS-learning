@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+        <button>button clicked</button>
+</body>
+<script>
+    class React {
+        constructor() {
+            this.library = "React"
+            this.server = "http://localhost:300"
+
+        //requirements
+        document.querySelector('button').addEventListener("click", this.handleClick.bind(this))
+        }
+
+        handleClick() {
+            console.log("button clicked");
+            console.log(this.server);     
+        }
+    };
+
+    const app = new React();
+</script>
+</html>
+
+<!-- The Problem: The "Lost Context"
+When you pass a function to an Event Listener, you are essentially "handing it over" to the browser.
+
+When the user clicks the button:
+
+1> The browser executes the handleClick function.
+
+2> Because the browser is calling the function (not you), the context (this) inside handleClick resets.
+
+3> Inside handleClick, this now refers to the DOM element (the button), not your React class instance.
+
+Since the button does not have a property called server, this.server becomes undefined.
+
+The Solution: .bind(this)
+The .bind() method solves this by creating a permanently fixed version of your function.
+
+When you write this.handleClick.bind(this), you are telling JavaScript:
+
+"Hey, grab the handleClick function, but force the this inside it to always be the current React object (the app instance)."-->
+
+<!-- Arrow functions do not have their own this. They "inherit" this from the surrounding code. You can rewrite your class like this to avoid needing .bind() entirely: -->
