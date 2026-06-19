@@ -19,8 +19,8 @@ class User {
 
 const user = new User("tarunsaavi", "T&S@google.com", 43267);
 
-console.log(user.encryptPass());
-console.log(user.changeUserName());
+console.log(user.encryptPass());        //43267#$@%!
+console.log(user.changeUserName());     //TARUNSAAVI
 
 
 /*
@@ -41,7 +41,7 @@ setDetail.prototype.changeUserName = function () {
 
 const tea = new setDetail("tarunsaavi", "T&S@google.com", 43267)
 
-console.log(tea.encryptPass());
+console.log(tea.encryptPass());     //43267#$@%!
 
-console.log(tea.changeUserName());
+console.log(tea.changeUserName());      //TARUNSAAVI
 */
