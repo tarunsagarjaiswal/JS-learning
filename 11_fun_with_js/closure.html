@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lexical Scoping Example</title>
+</head>
+<body style="background-color: #313131; color: white;">
+    <h1>Check your console!</h1>
+</body>
+
+<script>
+    // --- EXAMPLE 1: LEXICAL SCOPING ---
+    
+    // 1. GLOBAL SCOPE: This is the outermost layer. 
+    // Anything declared here is visible to everything below it.
+    let universe = "Milky Way";
+
+    function solarSystem() {
+        // 2. OUTER FUNCTION SCOPE: This variable only exists inside solarSystem().
+        // Because of Lexical Scoping, the global scope cannot see 'star', 
+        // but any function inside solarSystem() CAN see it.
+        let star = "Sun";
+
+        function planetEarth() {
+            // 3. INNER FUNCTION SCOPE: This variable only exists inside planetEarth().
+            let planet = "Earth";
+
+            // 4. THE MAGIC OF LEXICAL SCOPING:
+            // When JavaScript runs this console.log, it needs to find 3 variables.
+            // - 'planet': It finds it right here in the local scope.
+            // - 'star': It doesn't find it here, so it looks UP one level to solarSystem(). Found it!
+            // - 'universe': It looks here, then looks up to solarSystem(), then looks UP to the Global scope. Found it!
+            console.log(`We are on ${planet}, orbiting the ${star}, in the ${universe}.`);
+            
+            // 5. THE ONE-WAY RULE:
+            // If we tried to console.log a variable created inside a function *nested deeper* // than this one, it would throw an error. You can only look UP the chain, never DOWN.
+        }
+
+        // Execute the inner function
+        planetEarth();
+
+        // 6. SCOPE ERROR PROOF:
+        // If we try to console.log(planet) right here, it will crash. 
+        // solarSystem() cannot look inside planetEarth() to see its variables.
+        // console.log(planet); // <-- UNCOMMENTING THIS CAUSES AN ERROR
+    }
+
+    // Trigger the chain of events
+    solarSystem();
+
+</script>
+
+<script>
+    // --- EXAMPLE 2: CLOSURE ---
+
+    // 1. THE OUTER FUNCTION: We are creating a function that acts like a factory.
+    // Its only job is to set up a video game score and give us a way to change it.
+    function createScoreTracker() {
+        
+        // 2. THE PRIVATE VARIABLE: This variable is trapped inside this function.
+        // Nobody from the outside world (global scope) can touch 'score' directly.
+        let score = 0;
+
+        // 3. THE INNER FUNCTION (THE CLOSURE): 
+        // This function increases the score and prints it.
+        // Because of Lexical Scoping, it has permanent access to 'score'.
+        function addPoints(points) {
+            score = score + points;
+            console.log(`You scored! Total score is now: ${score}`);
+        }
+
+        // 4. THE CRITICAL STEP: We RETURN the inner function itself.
+        // We are NOT executing it yet (notice there are no parentheses after addPoints).
+        // We are handing the actual function tool back to the outside world.
+        return addPoints;
+    }
+
+    // 5. CREATING THE CLOSURE:
+    // We run the factory function. It creates the 'score' variable (set to 0),
+    // and hands us back the 'addPoints' function, which we store in 'playerOne'.
+    // IMPORTANT: createScoreTracker() has now finished running and is GONE from memory.
+    const playerOne = createScoreTracker();
+
+    // 6. PROVING THE CLOSURE WORKS:
+    // createScoreTracker is dead and gone, but watch what happens when we run playerOne().
+    
+    playerOne(10); // Prints: "You scored! Total score is now: 10"
+    
+    // 7. THE BACKPACK IN ACTION:
+    // How did it remember the score was 10? 
+    // Because when 'addPoints' was created, it formed a CLOSURE. It packed the 'score' 
+    // variable into an invisible backpack. Every time we call playerOne(), it opens 
+    // that backpack, updates the score, and puts it back.
+    playerOne(5);  // Prints: "You scored! Total score is now: 15"
+    playerOne(50); // Prints: "You scored! Total score is now: 65"
+
+    // 8. BONUS: TRULY PRIVATE DATA
+    // If we make a second player, they get a completely separate closure (a brand new backpack).
+    const playerTwo = createScoreTracker();
+    playerTwo(100); // Prints: "You scored! Total score is now: 100" (Does not affect playerOne!)
+</script>
+</html>

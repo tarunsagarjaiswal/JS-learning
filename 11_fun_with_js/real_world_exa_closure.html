@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+</head>
+<body style="background-color: #212121;">
+    <button id="orange">orange</button>
+    <button id="red">red</button>
+</body>
+
+<script>
+    // 1. THE FACTORY: Takes a parameter ('color') to set up the environment.
+    function bgc(color) {
+        
+        // 2. THE CLOSURE: This inner function uses lexical scoping to "see" 
+        // the 'color' variable. It packs it into its memory backpack.
+        function passrefence() {
+            document.body.style.backgroundColor = color
+        }
+
+        // 3. RETURN THE FUNCTION: We return the reference (no parentheses!).
+        // We are handing the button a tool to use later, not using it right now.
+        return passrefence;
+    }
+        
+    // 4. ATTACHING THE CLOSURE: bgc("orange") executes immediately.
+    // It returns the 'passrefence' function with "orange" permanently locked in its memory.
+    document.querySelector('#orange').onclick = bgc("orange");
+
+    // Creates a completely separate closure, locked to "red".
+    document.querySelector('#red').onclick = bgc("red");
+
+</script>
+
+</html>
